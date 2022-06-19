@@ -1,11 +1,26 @@
 // importing react hook
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { remove, incrementQuantity } from "../../redux/slice/Cart.slice";
 
 const CartCard = ({ img, name, price, q }) => {
   // states
   const [quantity, setQuantity] = useState(0);
-  const [product, setProduct] = useState([]);
+
+  // redux
+  const dispatch = useDispatch();
+
+  // increment quantity
+  const increment = (e) => {
+    dispatch(incrementQuantity({ name }));
+  };
+
+  // remove from cart
+  const removeFromCart = (e) => {
+    e.preventDefault();
+
+    dispatch(remove({ name }));
+  };
 
   // useEffect hook
   useEffect(() => setQuantity(q), []);
@@ -39,8 +54,9 @@ const CartCard = ({ img, name, price, q }) => {
             src={img}
             alt="Card image cap"
             style={{
-              width: "22rem",
+              width: "18rem",
               height: "auto",
+              padding: "2rem",
               objectFit: "contain",
             }}
           />
@@ -61,10 +77,7 @@ const CartCard = ({ img, name, price, q }) => {
           </p>
           <hr />
           <div className="row">
-            <button
-              className="col-2 btn btn-success"
-              onClick={incrementQuantity}
-            >
+            <button className="col-2 btn btn-success" onClick={increment}>
               Add 1 more
             </button>
             <div className="col-1"></div>
@@ -75,7 +88,7 @@ const CartCard = ({ img, name, price, q }) => {
               Remove 1 more
             </button>
             <div className="col-1"></div>
-            <button className="col-2 btn btn-danger" onClick={removeProduct}>
+            <button className="col-2 btn btn-danger" onClick={removeFromCart}>
               Remove
             </button>
           </div>

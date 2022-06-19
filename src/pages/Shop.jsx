@@ -6,8 +6,11 @@ import axios from "axios";
 import Product from "../components/Cards/Product";
 
 const Shop = () => {
+  // states
   const [products, setProducts] = useState([]);
   const [active, setActive] = useState(false);
+
+  // useffect for api call
   useEffect(() => {
     axios
       .get("https://fakestoreapi.com/products")
@@ -22,16 +25,20 @@ const Shop = () => {
       {active ? (
         <div className="container">
           <div className="row">
-            {products.map((product, index) => (
-              <div className="col-md-4 col-sm-12">
-                <Product
-                  img={product.image}
-                  name={product.title}
-                  description={product.description}
-                  price={product.price}
-                />
-              </div>
-            ))}
+            {products
+              .filter((product) => {
+                return product;
+              })
+              .map((product, index) => (
+                <div className="col-md-4 col-sm-12">
+                  <Product
+                    img={product.image}
+                    name={product.title}
+                    description={product.description}
+                    price={product.price}
+                  />
+                </div>
+              ))}
           </div>
         </div>
       ) : (

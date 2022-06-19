@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 // importing assets
 import Logo from "../assets/logo.png";
 
 const Navbar = () => {
+  // cart quanitity
+  const product_in_cart = useSelector((state) => state.cart.length);
+  const username = useSelector((state) => state.user.name);
+
   // search box text state
   const [searchText, setSearchText] = useState("");
-  // cart state
-  const [productsInCart, setProductsInCard] = useState(0);
-  // login state
-  const [username, setUsername] = useState("login");
-  // current page state
-  const [page, setPage] = useState(0);
 
   const menuItems = [
     {
@@ -55,7 +55,7 @@ const Navbar = () => {
               <div className="d-flex flex-row">
                 <img
                   src={
-                    username === "login"
+                    username === "Guest"
                       ? "https://cdn-icons-png.flaticon.com/512/149/149071.png"
                       : "https://i.imgur.com/EYFtR83.jpg"
                   }
@@ -103,7 +103,10 @@ const Navbar = () => {
                 </span>
                 <div className="d-flex flex-column ms-2">
                   <span className="fw-bold">Cart</span>
-                  <span className="qty">{productsInCart} Product</span>
+                  <span className="qty">
+                    {product_in_cart}{" "}
+                    {product_in_cart <= 1 ? "Product" : "Products"}
+                  </span>
                 </div>
               </div>
             </div>
@@ -131,13 +134,11 @@ const Navbar = () => {
             <ul className="navbar-nav">
               {menuItems.map((item, index) => (
                 <li className="nav-item" key={index}>
-                  <a
-                    className={"nav-link active"}
-                    aria-current="page"
-                    href={item.link}
-                  >
-                    {item.title}
-                  </a>
+                  <Link to={item.link} style={{ textDecoration: "none" }}>
+                    <a className={"nav-link active"} aria-current="page">
+                      {item.title}
+                    </a>
+                  </Link>
                 </li>
               ))}
             </ul>
