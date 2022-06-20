@@ -32,6 +32,7 @@ const Shop = () => {
               .map((product, index) => (
                 <div className="col-md-4 col-sm-12">
                   <Product
+                    id={product.id}
                     img={product.image}
                     name={product.title}
                     description={product.description}

@@ -5,7 +5,7 @@ import { remove, incrementQuantity } from "../../redux/slice/Cart.slice";
 
 const CartCard = ({ img, name, price, q }) => {
   // states
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(q);
 
   // redux
   const dispatch = useDispatch();
@@ -18,7 +18,6 @@ const CartCard = ({ img, name, price, q }) => {
   // remove from cart
   const removeFromCart = (e) => {
     e.preventDefault();
-
     dispatch(remove({ name }));
   };
 
@@ -30,7 +29,6 @@ const CartCard = ({ img, name, price, q }) => {
   const decrementQuantity = () => {
     if (quantity > 1) setQuantity(quantity - 1);
   };
-  const removeProduct = () => {};
   return (
     <div className="card" style={{ width: "90vw", margin: "2vw auto" }}>
       <div
@@ -72,7 +70,7 @@ const CartCard = ({ img, name, price, q }) => {
             {quantity}
           </p>
           <p className="card-text">
-            <b>Total: $ </b>
+            <b>Total: Rs. </b>
             <i className="text-success h6">{quantity * price}</i>
           </p>
           <hr />

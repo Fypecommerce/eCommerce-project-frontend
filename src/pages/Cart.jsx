@@ -13,7 +13,7 @@ const Cart = () => {
           <div className="row">
             <div className="col-12 mt-3">
               {products.map((product, index) => (
-                <div className="col-12">
+                <div className="col-12" key={index}>
                   <CartCard
                     img={product.img}
                     name={product.name}
@@ -24,6 +24,20 @@ const Cart = () => {
                 </div>
               ))}
             </div>
+          </div>
+          <div
+            className="container"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: "2vw",
+            }}
+          >
+            <Link to="/checkout">
+              <button className="btn btn-success">Checkout to payment</button>
+            </Link>
           </div>
         </div>
       </>

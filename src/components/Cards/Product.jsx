@@ -1,10 +1,12 @@
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { add, remove } from "../../redux/slice/Cart.slice";
+import { Link } from "react-router-dom";
 
-const Product = ({ img, name, description, price }) => {
+const Product = ({ id, img, name, description, price }) => {
   // product detail
   const product = {
+    id,
     img,
     name,
     description,
@@ -36,30 +38,38 @@ const Product = ({ img, name, description, price }) => {
   };
 
   return (
-    <div
-      className="card"
-      style={{ width: "22rem", margin: "4vw auto", height: "32rem" }}
-    >
-      <img
-        className="card-img-top"
-        src={img}
-        alt="Card image cap"
+    <Link to={`/product/${id}`}>
+      <div
+        className="card"
         style={{
-          width: "16rem",
-          height: "16rem",
-          objectFit: "contain",
-          margin: "1rem auto",
+          width: "22rem",
+          margin: "4vw auto",
+          height: "32rem",
+          color: "#000",
+          textDecoration: "none",
         }}
-      />
-      <div className="card-body">
-        <p className="card-title">{name.slice(0, 18)}...</p>
-        <h6 className="card-title">$ {price}</h6>
-        <p className="card-text">{description.slice(0, 50)}...</p>
-        <a className="btn btn-primary" onClick={addToCart}>
-          Add to Cart
-        </a>
+      >
+        <img
+          className="card-img-top"
+          src={img}
+          alt="Card image cap"
+          style={{
+            width: "16rem",
+            height: "16rem",
+            objectFit: "contain",
+            margin: "1rem auto",
+          }}
+        />
+        <div className="card-body">
+          <p className="card-title">{name.slice(0, 18)}...</p>
+          <h6 className="card-title">Rs. {price}</h6>
+          <p className="card-text">{description.slice(0, 50)}...</p>
+          <a className="btn btn-primary" onClick={addToCart}>
+            Add to Cart
+          </a>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
