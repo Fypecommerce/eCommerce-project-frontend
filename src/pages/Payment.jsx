@@ -1,6 +1,7 @@
 // importing react
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Payment = () => {
   // states
@@ -15,6 +16,10 @@ const Payment = () => {
       t += product[i].ppu * product[i].q;
     }
     return t - t / 5;
+  };
+  // handle payments
+  const handlePayment = () => {
+    alert("Payment made");
   };
   return (
     <div className="container d-flex justify-content-center mt-5 mb-5">
@@ -249,9 +254,11 @@ const Payment = () => {
           </div>
 
           <div className="p-3">
-            <button className="btn btn-primary btn-block free-button">
-              Proceed
-            </button>
+            <Link to="/paypal">
+              <button className="btn btn-primary btn-block free-button">
+                Proceed
+              </button>
+            </Link>
             <div className="text-center">
               <a href="#">Have a promo code?</a>
             </div>
